@@ -12,6 +12,7 @@ public class MainPageSteps {
     private static String startURL = "https://www.wrike.com/";
 
     public MainPageSteps(WebDriver webDriver) {
+        this.webDriver = webDriver;
         mainPage = new MainPage(webDriver);
     }
 
