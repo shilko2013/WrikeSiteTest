@@ -16,8 +16,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public abstract class BrowserTest {
 
     protected WebDriver webDriver;
-    private MainPageSteps mainPageSteps;
-    private VerifyEmailPageSteps verifyEmailPageSteps;
 
     @Before
     public void setUp() {
@@ -26,10 +24,18 @@ public abstract class BrowserTest {
 
     @Test
     public void test() {
-        mainPageSteps = new MainPageSteps(webDriver);
+        testMainPage();
+        testVerifyEmailPage();
+    }
+
+    private void testMainPage() {
+        MainPageSteps mainPageSteps = new MainPageSteps(webDriver);
         mainPageSteps.startForFree();
         mainPageSteps.checkSubmit();
-        verifyEmailPageSteps = new VerifyEmailPageSteps(webDriver);
+    }
+
+    private void testVerifyEmailPage() {
+        VerifyEmailPageSteps verifyEmailPageSteps = new VerifyEmailPageSteps(webDriver);
         verifyEmailPageSteps.sendForm();
         verifyEmailPageSteps.checkSubmit();
     }

@@ -14,7 +14,7 @@ public class MainPageSteps {
 
     private static String startURL = ConfigProperties.getConfigProperties().getProperty("test.startURL");
     private static String redirectedURLRegex = ConfigProperties.getConfigProperties().getProperty("test.redirectedURLRegex");
-    private static long redirectedWaitTimeSeconds = Long.parseLong(ConfigProperties.getConfigProperties().getProperty("test.redirectedWaitTimeSeconds"));
+    private static long waitTimeSeconds = Long.parseLong(ConfigProperties.getConfigProperties().getProperty("test.waitTimeSeconds"));
 
     public MainPageSteps(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -29,7 +29,7 @@ public class MainPageSteps {
     }
 
     public void checkSubmit() {
-        new WebDriverWait(webDriver, redirectedWaitTimeSeconds)
+        new WebDriverWait(webDriver, waitTimeSeconds)
                 .withMessage("Email submit failed")
                 .until(ExpectedConditions.urlMatches(redirectedURLRegex));
     }

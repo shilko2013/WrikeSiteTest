@@ -13,7 +13,7 @@ public class VerifyEmailPageSteps {
 
     private VerifyEmailPage verifyEmailPage;
 
-    private static long redirectedWaitTimeSeconds = Long.parseLong(ConfigProperties.getConfigProperties().getProperty("test.redirectedWaitTimeSeconds"));
+    private static long waitTimeSeconds = Long.parseLong(ConfigProperties.getConfigProperties().getProperty("test.waitTimeSeconds"));
 
     public VerifyEmailPageSteps(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -26,7 +26,7 @@ public class VerifyEmailPageSteps {
     }
 
     public void checkSubmit() {
-        new WebDriverWait(webDriver, redirectedWaitTimeSeconds)
+        new WebDriverWait(webDriver, waitTimeSeconds)
                 .withMessage("Answer sending failed")
                 .until(webDriver1 -> verifyEmailPage.sendedSuccess());
     }
