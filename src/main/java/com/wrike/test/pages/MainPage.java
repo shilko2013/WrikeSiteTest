@@ -1,6 +1,7 @@
 package com.wrike.test.pages;
 
-import com.wrike.test.config.ConfigProperties;
+import com.wrike.test.util.ConfigProperties;
+import com.wrike.test.util.RandomTextStringGenerator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,15 +33,7 @@ public class MainPage extends Page {
 
     public void enterRandomEmail() {
         String emailTail = ConfigProperties.getConfigProperties().getProperty("test.emailTail");
-        Random binaryRandom = new Random();
-        String emailHead = new Random()
-                .ints('A', 'Z')
-                .limit(new Random().nextInt(10) + 5)
-                .map(e -> binaryRandom.nextBoolean() ? e : e + 0x20)
-                .collect(StringBuilder::new,
-                        StringBuilder::appendCodePoint,
-                        StringBuilder::append)
-                .toString();
+        String emailHead = RandomTextStringGenerator.getRandomTextString();
         enterEmail(emailHead + emailTail);
     }
 

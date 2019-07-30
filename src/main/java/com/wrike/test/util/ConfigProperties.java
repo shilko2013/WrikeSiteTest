@@ -1,4 +1,4 @@
-package com.wrike.test.config;
+package com.wrike.test.util;
 
 import java.io.FileReader;
 import java.io.IOException;

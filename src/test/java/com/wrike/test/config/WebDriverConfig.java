@@ -1,9 +1,8 @@
 package com.wrike.test.config;
 
+import com.wrike.test.util.ConfigProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.util.concurrent.TimeUnit;
 
 public class WebDriverConfig {
 

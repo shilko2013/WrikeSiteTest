@@ -1,8 +1,9 @@
 package com.wrike.test;
 
-import com.wrike.test.config.ConfigProperties;
+import com.wrike.test.util.ConfigProperties;
 import com.wrike.test.config.WebDriverConfig;
 import com.wrike.test.steps.MainPageSteps;
+import com.wrike.test.steps.VerifyEmailPageSteps;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,8 +17,7 @@ public abstract class BrowserTest {
 
     protected WebDriver webDriver;
     private MainPageSteps mainPageSteps;
-    private static String redirectedTitle = ConfigProperties.getConfigProperties().getProperty("test.redirectedTitle");
-    private static long redirectedWaitTimeSeconds = Long.parseLong(ConfigProperties.getConfigProperties().getProperty("test.redirectedWaitTimeSeconds"));
+    private VerifyEmailPageSteps verifyEmailPageSteps;
 
     @Before
     public void setUp() {
@@ -28,14 +28,10 @@ public abstract class BrowserTest {
     public void test() {
         mainPageSteps = new MainPageSteps(webDriver);
         mainPageSteps.startForFree();
-        try {
-            new WebDriverWait(webDriver, redirectedWaitTimeSeconds)
-                    .until(ExpectedConditions.titleIs(redirectedTitle));
-        } catch (TimeoutException ignored) {
-        } //ignored for next assert
-        finally {
-            Assert.assertEquals(redirectedTitle, webDriver.getTitle());
-        }
+        mainPageSteps.checkSubmit();
+        verifyEmailPageSteps = new VerifyEmailPageSteps(webDriver);
+        verifyEmailPageSteps.sendForm();
+        verifyEmailPageSteps.checkSubmit();
     }
 
     @After
