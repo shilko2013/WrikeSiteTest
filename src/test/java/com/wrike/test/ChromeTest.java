@@ -4,13 +4,12 @@ import com.wrike.test.config.WebDriverConfig;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 
 public class ChromeTest extends BrowserTest {
 
     @Before
     @Override
-    public void setUp() throws Exception {
+    public void setUp() {
         webDriver = WebDriverConfig.getNewChromeDriver();
     }
 
@@ -22,7 +21,7 @@ public class ChromeTest extends BrowserTest {
 
     @After
     @Override
-    public void tearDown() throws Exception {
+    public void tearDown() {
         WebDriverConfig.shutDownChromeDriver();
     }
 }
