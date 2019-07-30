@@ -1,8 +1,7 @@
 package com.wrike.test;
 
-import com.wrike.test.config.AppProperties;
+import com.wrike.test.config.ConfigProperties;
 import com.wrike.test.config.WebDriverConfig;
-import com.wrike.test.pages.MainPage;
 import com.wrike.test.steps.MainPageSteps;
 import org.junit.After;
 import org.junit.Assert;
@@ -13,14 +12,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.FileReader;
-
 public abstract class BrowserTest {
 
     protected WebDriver webDriver;
     private MainPageSteps mainPageSteps;
-    private static String redirectedTitle = AppProperties.getConfigProperties().getProperty("test.redirectedTitle");
-    private static long redirectedWaitTimeSeconds = Long.parseLong(AppProperties.getConfigProperties().getProperty("test.redirectedWaitTimeSeconds"));
+    private static String redirectedTitle = ConfigProperties.getConfigProperties().getProperty("test.redirectedTitle");
+    private static long redirectedWaitTimeSeconds = Long.parseLong(ConfigProperties.getConfigProperties().getProperty("test.redirectedWaitTimeSeconds"));
 
     @Before
     public void setUp() {

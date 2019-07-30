@@ -10,9 +10,9 @@ public class WebDriverConfig {
     private static WebDriver chromeDriver = null;
 
     static {
-        String pathToDrivers = "src/main/resources/drivers/";
-        String pathToChromeDriver = pathToDrivers + "chromedriver_v.41-43";
-        System.setProperty("webdriver.chrome.driver", pathToChromeDriver);
+        String pathToDrivers = ConfigProperties.getConfigProperties().getProperty("drivers.path");
+        String pathToChromeDriver = pathToDrivers + ConfigProperties.getConfigProperties().getProperty("driver.chrome.filename");
+        System.setProperty(ConfigProperties.getConfigProperties().getProperty("driver.chrome.variable"), pathToChromeDriver);
     }
 
     public static WebDriver getDriver() {

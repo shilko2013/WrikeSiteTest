@@ -1,5 +1,6 @@
 package com.wrike.test.pages;
 
+import com.wrike.test.config.ConfigProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,8 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import java.util.Random;
 
 public class MainPage extends Page {
-
-
 
     @FindBy(xpath = "//*[@class='wg-header__desktop']//*[contains(@class,'wg-header__free-trial-button')]")
     private WebElement buttonStartForFree;
@@ -32,7 +31,7 @@ public class MainPage extends Page {
     }
 
     public void enterRandomEmail() {
-        String emailTail = "+wpt@wriketask.qaa";
+        String emailTail = ConfigProperties.getConfigProperties().getProperty("test.emailTail");
         Random binaryRandom = new Random();
         String emailHead = new Random()
                 .ints('A', 'Z')
