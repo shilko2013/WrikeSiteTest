@@ -8,6 +8,8 @@ import java.util.Random;
 
 public class MainPage extends Page {
 
+
+
     @FindBy(xpath = "//*[@class='wg-header__desktop']//*[contains(@class,'wg-header__free-trial-button')]")
     private WebElement buttonStartForFree;
 
