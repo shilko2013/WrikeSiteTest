@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,7 +17,7 @@ public abstract class BrowserTest {
     protected WebDriver webDriver;
     private MainPageSteps mainPageSteps;
     private static String redirectedTitle = "Thank you for choosing Wrike!";
-    private static long redirectedWaitTimeSeconds = 10;
+    private static long redirectedWaitTimeSeconds = 5;
 
     @Before
     public void setUp() {
@@ -27,9 +28,14 @@ public abstract class BrowserTest {
     public void test() {
         mainPageSteps = new MainPageSteps(webDriver);
         mainPageSteps.startForFree();
-        new WebDriverWait(webDriver, redirectedWaitTimeSeconds)
-                .until(ExpectedConditions.titleIs(redirectedTitle));
-        Assert.assertEquals(redirectedTitle, webDriver.getTitle());
+        try {
+            new WebDriverWait(webDriver, redirectedWaitTimeSeconds)
+                    .until(ExpectedConditions.titleIs(redirectedTitle));
+        } catch (TimeoutException ignored) {
+        } //ignored for next assert
+        finally {
+            Assert.assertEquals(redirectedTitle, webDriver.getTitle());
+        }
     }
 
     @After
