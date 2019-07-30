@@ -38,6 +38,8 @@ public abstract class BrowserTest {
         VerifyEmailPageSteps verifyEmailPageSteps = new VerifyEmailPageSteps(webDriver);
         verifyEmailPageSteps.sendForm();
         verifyEmailPageSteps.checkSubmit();
+        Assert.assertTrue(verifyEmailPageSteps.checkTwitterReference());
+        Assert.assertTrue(verifyEmailPageSteps.checkTwitterIcon());
     }
 
     @After
