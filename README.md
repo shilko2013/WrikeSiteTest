@@ -1,5 +1,5 @@
 # WrikeSiteTest
-This project tests some abilities of wrike.com site:
+This project tests some possibilities of wrike.com site:
 * Start working with company via email
 * Company twitter page redirect
 
