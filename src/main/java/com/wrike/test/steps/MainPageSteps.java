@@ -34,14 +34,14 @@ public class MainPageSteps {
         webDriver.get(startURL);
     }
 
-    @Step("Submitting form with email")
+    @Step("Submit form with {email} email")
     public void startForFreeWithEmail(String email) {
         mainPage.startForFree();
         mainPage.enterEmail(email);
         mainPage.submitEmail();
     }
 
-    @Step("Checking success email submitting")
+    @Step("Check success email submitting")
     public void checkSubmit() {
         new WebDriverWait(webDriver, waitTimeSeconds)
                 .withMessage("Email submit failed")

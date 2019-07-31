@@ -39,7 +39,8 @@ public abstract class BrowserTest {
 
     private void testVerifyEmailPage() {
         VerifyEmailPageSteps verifyEmailPageSteps = new VerifyEmailPageSteps(webDriver);
-        verifyEmailPageSteps.sendForm();
+        verifyEmailPageSteps.fillForm();
+        verifyEmailPageSteps.submitForm();
         verifyEmailPageSteps.checkSubmit();
     }
 
