@@ -21,12 +21,6 @@ public class VerifyEmailPage extends Page {
     @FindBy(xpath = "//*[@class='survey-success' or @class='resend-page__cell--success']")
     private WebElement successElement;
 
-    @FindBy(xpath = "(//*[@class='wg-footer__social-link'])[1]")
-    private WebElement twitterSection;
-
-    @FindBy(xpath = "(//*[@class='wg-footer__social-link'])[1]/*[name()='svg']/*[name()='use']")
-    private WebElement twitterIconReference;
-
     public VerifyEmailPage(WebDriver driver) {
         super(driver);
     }
@@ -53,11 +47,4 @@ public class VerifyEmailPage extends Page {
         return successElement.isDisplayed();
     }
 
-    public String getTwitterReference() {
-        return twitterSection.getAttribute("href");
-    }
-
-    public WebElement getTwitterIconReference() {
-        return twitterIconReference;
-    }
 }

@@ -19,6 +19,12 @@ public class MainPage extends Page {
     @FindBy(xpath = "//*[contains(@class,'modal-form-trial__submit')]")
     private WebElement emailSubmitButton;
 
+    @FindBy(xpath = "(//*[@class='wg-footer__social-link'])[1]")
+    private WebElement twitterSection;
+
+    @FindBy(xpath = "(//*[@class='wg-footer__social-link'])[1]/*[name()='svg']/*[name()='use']")
+    private WebElement twitterIconReference;
+
     public MainPage(WebDriver webDriver) {
         super(webDriver);
     }
@@ -39,6 +45,14 @@ public class MainPage extends Page {
 
     public void submitEmail() {
         emailSubmitButton.click();
+    }
+
+    public String getTwitterReference() {
+        return twitterSection.getAttribute("href");
+    }
+
+    public WebElement getTwitterIconReference() {
+        return twitterIconReference;
     }
 
 }

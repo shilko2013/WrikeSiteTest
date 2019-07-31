@@ -1,9 +1,7 @@
 package com.wrike.test;
 
 import com.wrike.test.config.WebDriverConfig;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 public class ChromeTest extends BrowserTest {
 
@@ -13,10 +11,14 @@ public class ChromeTest extends BrowserTest {
         webDriver = WebDriverConfig.getNewChromeDriver();
     }
 
-    @Test
     @Override
-    public void test() {
-        super.test();
+    public void testVerifyEmail() {
+        super.testVerifyEmail();
+    }
+
+    @Override
+    public void testTwitterIcon() {
+        super.testTwitterIcon();
     }
 
     @After

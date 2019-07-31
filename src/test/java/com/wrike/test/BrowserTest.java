@@ -4,10 +4,7 @@ import com.wrike.test.util.ConfigProperties;
 import com.wrike.test.config.WebDriverConfig;
 import com.wrike.test.steps.MainPageSteps;
 import com.wrike.test.steps.VerifyEmailPageSteps;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -23,7 +20,7 @@ public abstract class BrowserTest {
     }
 
     @Test
-    public void test() {
+    public void testVerifyEmail() {
         testMainPage();
         testVerifyEmailPage();
     }
@@ -38,8 +35,13 @@ public abstract class BrowserTest {
         VerifyEmailPageSteps verifyEmailPageSteps = new VerifyEmailPageSteps(webDriver);
         verifyEmailPageSteps.sendForm();
         verifyEmailPageSteps.checkSubmit();
-        Assert.assertTrue(verifyEmailPageSteps.checkTwitterReference());
-        Assert.assertTrue(verifyEmailPageSteps.checkTwitterIcon());
+    }
+
+    @Test
+    public void testTwitterIcon() {
+        MainPageSteps mainPageSteps = new MainPageSteps(webDriver);
+        Assert.assertTrue(mainPageSteps.checkTwitterReference());
+        Assert.assertTrue(mainPageSteps.checkTwitterIcon());
     }
 
     @After
