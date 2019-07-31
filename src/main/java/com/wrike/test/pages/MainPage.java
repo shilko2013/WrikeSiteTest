@@ -1,12 +1,8 @@
 package com.wrike.test.pages;
 
-import com.wrike.test.util.ConfigProperties;
-import com.wrike.test.util.RandomTextStringGenerator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.Random;
 
 public class MainPage extends Page {
 

@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Ignored tests",
+    "matchedStatuses": [
+      "skipped"
+    ]
+  },
+  {
+    "name": "Outdated tests",
+    "matchedStatuses": [
+      "broken"
+    ],
+    "traceRegex": ".*IllegalArgumentException.*"
+  },
+  {
+    "name": "Product defects",
+    "matchedStatuses": [
+      "failed"
+    ]
+  },
+  {
+    "name": "Test defects",
+    "matchedStatuses": [
+      "broken"
+    ]
+  }
+]

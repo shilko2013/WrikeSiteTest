@@ -1,15 +1,13 @@
 package com.wrike.test.steps;
 
-import com.wrike.test.util.ConfigProperties;
 import com.wrike.test.pages.MainPage;
 import io.qameta.allure.Step;
+import javafx.util.Pair;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,9 +22,6 @@ public class MainPageSteps {
     private static String startURL = getConfigProperties().getProperty("test.startURL");
     private static String redirectedURLRegex = getConfigProperties().getProperty("test.redirectedURLRegex");
     private static long waitTimeSeconds = Long.parseLong(getConfigProperties().getProperty("test.waitTimeSeconds"));
-    private static String twitterReference = getConfigProperties().getProperty("test.twitterReference");
-    private static String twitterIconData = getConfigProperties().getProperty("test.twitterIcon.data");
-    private static String twitterIconColour = getConfigProperties().getProperty("test.twitterIcon.colour");
 
     public MainPageSteps(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -48,31 +43,32 @@ public class MainPageSteps {
                 .until(ExpectedConditions.urlMatches(redirectedURLRegex));
     }
 
-    public boolean checkTwitterReference() {
-        return mainPage.getTwitterReference().equals(twitterReference);
+    @Step("Compare valid and present twitter reference")
+    public String getTwitterReference() {
+        return mainPage.getTwitterReference();
     }
 
-    public boolean checkTwitterIcon() {
+    /*
+    @return Pair of "d" tag and "fill" tag
+     */
+    @Step("Compare valid and present twitter icon")
+    public Pair<String,String> getTwitterIcon() {
         String relativePathToIcon = mainPage.getTwitterIconReference().getAttribute("xlink:href"); //get icon
-        WebDriver driverIcon = new ChromeDriver();
-        String d = null, fill = null;
-        try {
-            driverIcon.get(startURL + relativePathToIcon);
-            String iconCode = driverIcon.findElement(By.xpath("//*[@id='twitter']")).getAttribute("innerHTML");
-            Pattern dataPattern = Pattern.compile("<path.*? d=\"([^\"]*?)\"");
-            Matcher dataMatcher = dataPattern.matcher(iconCode);
-            dataMatcher.find();
+        webDriver.get(startURL + relativePathToIcon); //downloading picture
+        String iconCode = webDriver.findElement(By.xpath("//*[@id='twitter']")).getAttribute("innerHTML");
+        Pattern dataPattern = Pattern.compile("<path.*? d=\"([^\"]*?)\"");
+        Matcher dataMatcher = dataPattern.matcher(iconCode);
+        String d, fill;
+        if (dataMatcher.find())
             d = dataMatcher.group(1);
-            Pattern colourPattern = Pattern.compile("<path.*? fill=\"([^\"]*?)\"");
-            Matcher colourMatcher = colourPattern.matcher(iconCode);
-            colourMatcher.find();
+        else
+            throw new IllegalArgumentException();
+        Pattern colourPattern = Pattern.compile("<path.*? fill=\"([^\"]*?)\"");
+        Matcher colourMatcher = colourPattern.matcher(iconCode);
+        if (colourMatcher.find())
             fill = colourMatcher.group(1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            driverIcon.quit();
-        }
-
-        return twitterIconData.equals(d) && twitterIconColour.equals(fill);
+        else
+            throw new IllegalArgumentException();
+        return new Pair<>(d,fill);
     }
 }

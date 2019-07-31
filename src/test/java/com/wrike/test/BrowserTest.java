@@ -3,10 +3,10 @@ package com.wrike.test;
 import com.wrike.test.config.WebDriverConfig;
 import com.wrike.test.steps.MainPageSteps;
 import com.wrike.test.steps.VerifyEmailPageSteps;
-import com.wrike.test.util.ConfigProperties;
 import com.wrike.test.util.RandomTextStringGenerator;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
+import javafx.util.Pair;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
 
@@ -17,6 +17,9 @@ public abstract class BrowserTest {
     protected WebDriver webDriver;
 
     private static String emailTail = getConfigProperties().getProperty("test.emailTail");
+    private static String twitterReference = getConfigProperties().getProperty("test.twitterReference");
+    private static String twitterIconData = getConfigProperties().getProperty("test.twitterIcon.data");
+    private static String twitterIconColour = getConfigProperties().getProperty("test.twitterIcon.colour");
 
     @Before
     public void setUp() {
@@ -49,8 +52,8 @@ public abstract class BrowserTest {
     @Description("Checking twitter redirect URL. Checking twitter icon.")
     public void testTwitterIcon() {
         MainPageSteps mainPageSteps = new MainPageSteps(webDriver);
-        Assert.assertTrue(mainPageSteps.checkTwitterReference());
-        Assert.assertTrue(mainPageSteps.checkTwitterIcon());
+        Assert.assertEquals(mainPageSteps.getTwitterReference(),twitterReference);
+        Assert.assertEquals(new Pair<>(twitterIconData,twitterIconColour),mainPageSteps.getTwitterIcon());
     }
 
     @After
