@@ -37,12 +37,6 @@ public class MainPage extends Page {
         inputEmailField.sendKeys(email);
     }
 
-    public void enterRandomEmail() {
-        String emailTail = ConfigProperties.getConfigProperties().getProperty("test.emailTail");
-        String emailHead = RandomTextStringGenerator.getRandomTextString();
-        enterEmail(emailHead + emailTail);
-    }
-
     public void submitEmail() {
         emailSubmitButton.click();
     }

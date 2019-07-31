@@ -2,6 +2,7 @@ package com.wrike.test.steps;
 
 import com.wrike.test.util.ConfigProperties;
 import com.wrike.test.pages.MainPage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -33,12 +34,14 @@ public class MainPageSteps {
         webDriver.get(startURL);
     }
 
-    public void startForFree() {
+    @Step("Submitting form with email")
+    public void startForFreeWithEmail(String email) {
         mainPage.startForFree();
-        mainPage.enterRandomEmail();
+        mainPage.enterEmail(email);
         mainPage.submitEmail();
     }
 
+    @Step("Checking success email submitting")
     public void checkSubmit() {
         new WebDriverWait(webDriver, waitTimeSeconds)
                 .withMessage("Email submit failed")
