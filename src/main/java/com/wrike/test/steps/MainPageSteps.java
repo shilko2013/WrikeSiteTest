@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +25,7 @@ public class MainPageSteps {
     private static long waitTimeSeconds = Long.parseLong(getConfigProperties().getProperty("test.waitTimeSeconds"));
     private static String twitterReference = getConfigProperties().getProperty("test.twitterReference");
     private static String twitterIconData = getConfigProperties().getProperty("test.twitterIcon.data");
-    private static String twitterIconColour = getConfigProperties().getProperty("test.twitterIcon,colour");
+    private static String twitterIconColour = getConfigProperties().getProperty("test.twitterIcon.colour");
 
     public MainPageSteps(WebDriver webDriver) {
         this.webDriver = webDriver;
