@@ -13,3 +13,9 @@ Testing platform configuration:
 * Allure-report version: 2.6.0
 * Browser: Chrome
 * Browser version: 72.0
+
+Test report examples
+
+![](ExampleImages/Example1.png)
+
+![](ExampleImages/Example2.png)
